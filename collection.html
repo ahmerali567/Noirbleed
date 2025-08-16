@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoirBleed — Collection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAV -->
+   
+  <nav class="bg-gradient-to-r from-[#1E3A8A] via-[#374151] to-[#800000] text-white p-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-10 h-10" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><path d="M34 96c28-48 120-84 240-64 120 20 120 64 86 86-34 22-132 30-220 6S30 120 34 96z" fill="#4B5563" opacity="0.14"/></svg>
+        <div class="font-bold text-lg">NoirBleed</div>
+      </a>
+      <div class="flex gap-4">
+  <a href="index.html" class="hover:underline">Home</a>
+  <a href="collection.html?type=tshirt" class="hover:underline">Collections</a>
+  <a href="cart.html" class="hover:underline">Cart</a>
+  <a href="about.html" class="hover:underline">About</a>
+</div>
+
+      <div>
+        <a href="cart.html" class="bg-white/10 px-3 py-2 rounded">Cart</a>
+      </div>
+    </div>
+    
+  </nav>
+
+  <!-- Collection title -->
+  <main class="max-w-7xl mx-auto p-6">
+    <h1 id="collection-title" class="text-3xl font-bold mb-4">Collection</h1>
+    <p id="collection-desc" class="text-gray-600 mb-6"></p>
+
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-6"></div>
+  </main>
+
+  <script>
+    // parse query
+    const params = new URLSearchParams(window.location.search);
+    const type = (params.get('type') || 'tshirt').toLowerCase();
+
+    const names = { tshirt: "T-Shirt", hoodie: "Hoodie", crop: "Crop Hoodie" };
+    const counts = { tshirt: 100, hoodie: 50, crop: 50 };
+    const imageMap = {
+      tshirt: "https://assets.myntassets.com/dpr_1.5,q_30,w_400,c_limit,fl_progressive/assets/images/32852606/2025/4/4/4e38d83f-0525-49e8-9d4b-0d0b7f11f2e01743751068248-Allen-Solly-Men-Tshirts-8231743751067812-1.jpg",
+      hoodie: "https://underarmour.scene7.com/is/image/Underarmour/V5-1373880-421_FC?rp=standard-0pad|gridTileDesktop&scl=1&fmt=jpg&qlt=50&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=512&hei=640&size=512,640",
+      crop: "https://www.gorillawear.com/resize/91522800-pixley-crop-top-hoodie-gray_7513763182586.jpg/0/1100/True/pixley-crop-top-hoodie-gray-xs.jpg"
+    };
+
+    document.getElementById('collection-title').textContent = `${names[type]} Collection`;
+    document.getElementById('collection-desc').textContent = `${counts[type]} items — Graphical printed ${type === 'crop' ? 'crop hoodies (ladies only)' : 'apparel for men & women'} — high-quality prints.`;
+
+    const grid = document.getElementById('products-grid');
+
+    for (let i = 1; i <= counts[type]; i++) {
+      const price = (20 + Math.random()*20).toFixed(2);
+      const card = document.createElement('div');
+      card.className = "bg-white rounded-xl shadow overflow-hidden hover:shadow-xl transition";
+      // all products of this collection use the same user-provided image
+      const imgSrc = imageMap[type];
+      card.innerHTML = `
+        <img src="${imgSrc}" class="w-full h-48 object-cover" alt="${names[type]} ${i}">
+        <div class="p-4">
+          <h3 class="font-semibold">${names[type]} #${i}</h3>
+          <div class="text-gray-500 mt-1">$${price}</div>
+          <div class="mt-3 flex gap-2">
+            <button onclick="addToCart('${names[type]} #${i}', ${price})" class="flex-1 bg-[#1E3A8A] text-white py-2 rounded">Add to Cart</button>
+            <button onclick="viewProduct('${names[type]} #${i}')" class="flex-1 border rounded py-2">Quick View</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      cart.push({ name, price: parseFloat(price) });
+      localStorage.setItem('nb_cart', JSON.stringify(cart));
+      const prev = document.querySelector('#_nb_toast');
+      if (prev) prev.remove();
+      const toast = document.createElement('div');
+      toast.id = '_nb_toast';
+      toast.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow';
+      toast.textContent = `${name} added to cart`;
+      document.body.appendChild(toast);
+      setTimeout(()=>toast.remove(), 1800);
+    }
+
+    function viewProduct(name) {
+      alert(name + "\n\nThis is a demo quick view. For product detail pages, we can add a dedicated product.html.");
+    }
+  </script>
+
+</body>
+</html>

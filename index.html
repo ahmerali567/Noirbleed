@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoirBleed — Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    @keyframes popIn {
+      0% { transform: scale(.85) translateY(12px); opacity: 0; }
+      60% { transform: scale(1.05) translateY(-6px); opacity: 1; }
+      100% { transform: scale(1) translateY(0); }
+    }
+    .logo-pop { animation: popIn 900ms cubic-bezier(.2,.9,.3,1) both; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAVBAR -->
+  <nav class="bg-gradient-to-r from-[#1E3A8A] via-[#374151] to-[#800000] text-white p-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-12 h-12" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NoirBleed logo">
+          <g transform="translate(0,0)">
+            <path d="M18 48c10-18 44-32 88-24s74 36 70 48c-4 12-40 10-76 0S28 66 18 48z" fill="#4B5563" opacity="0.18"/>
+            <path d="M40 12c6 1 20 2 34 10 20 11 40 24 64 26 0 0-20 6-40 8S60 56 40 48 24 20 40 12z" fill="#4B5563" opacity="0.12"/>
+          </g>
+          <text x="18" y="48" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#1E3A8A">Noir</text>
+          <text x="86" y="56" font-family="Georgia, serif" font-size="40" font-weight="800" fill="#800000">Bleed</text>
+          <ellipse cx="150" cy="62" rx="3" ry="6" fill="#4B5563" opacity="0.9"/>
+        </svg>
+        <span class="text-2xl font-extrabold tracking-tight select-none">NoirBleed</span>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="collection.html?type=tshirt" class="hidden sm:inline text-sm px-3 py-2 rounded hover:bg-white/10">Collections</a>
+        <a href="cart.html" class="bg-white/10 hover:bg-white/20 px-3 py-2 rounded flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Cart
+        </a>
+      </div>
+      <div class="flex gap-4">
+  <a href="index.html" class="hover:underline">Home</a>
+  <a href="collection.html?type=tshirt" class="hover:underline">Collections</a>
+  <a href="cart.html" class="hover:underline">Cart</a>
+  <a href="about.html" class="hover:underline">About</a>
+</div>
+
+ 
+
+  </nav>
+
+  <!-- HERO (big, dramatic with logo and CTA) -->
+  <header class="relative">
+    <div class="h-[520px] md:h-[480px] bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1800&auto=format&fit=crop&ixlib=rb-4.0.3&s=8f8f9b2a3b2ea3e7b2f2a0b5b9f2b4a6');">
+      <div class="absolute inset-0 bg-black/45 flex items-center justify-center">
+        <div class="text-center px-6 md:px-0 max-w-3xl">
+          <div class="inline-block bg-white/6 backdrop-blur-md p-4 rounded-lg logo-pop">
+            <svg class="mx-auto w-56 h-20" viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NoirBleed hero logo">
+              <path d="M34 96c28-48 120-84 240-64 120 20 120 64 86 86-34 22-132 30-220 6S30 120 34 96z" fill="#4B5563" opacity="0.14"/>
+              <text x="24" y="74" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#1E3A8A">Noir</text>
+              <text x="190" y="88" font-family="Georgia, serif" font-size="56" font-weight="800" fill="#800000">Bleed</text>
+            </svg>
+          </div>
+
+          <h1 class="mt-6 text-3xl md:text-4xl font-extrabold text-white">Bold Prints. Unique Style. Only at NoirBleed.</h1>
+          <p class="mt-3 text-white/90 max-w-2xl mx-auto">Streetwear-inspired graphic tees & hoodies crafted for people who want to stand out. Limited runs — premium prints.</p>
+
+          <div class="mt-6 flex justify-center gap-4">
+            <a href="#collections" class="bg-[#800000] hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold shadow">Shop Collections</a>
+            <a href="#featured" class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium">Featured</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Collections preview -->
+  <section id="collections" class="max-w-7xl mx-auto p-6">
+    <h2 class="text-2xl font-bold text-center mb-6">Collections</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <!-- T-SHIRT IMAGE (user-provided) -->
+      <a href="collection.html?type=tshirt" class="group rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition">
+        <img src="https://printify.com/wp-content/uploads/2025/06/How-to-put-a-picture-on-a-shirt-Printify.png" alt="T-Shirts" class="w-full h-48 object-cover">
+        <div class="p-4 bg-white">
+          <h3 class="font-semibold">Graphic T-Shirts </h3>
+          <p class="text-sm text-gray-500 mt-1">Bold printed tees for men & women.</p>
+        </div>
+      </a>
+
+      <!-- HOODIE IMAGE (user-provided) -->
+      <a href="collection.html?type=hoodie" class="group rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition">
+        <img src="https://img.freepik.com/premium-photo/front-back-views-man-wearing-navy-blue-hoodie-mockup_964427-1334.jpg" alt="Hoodies" class="w-full h-48 object-cover">
+        <div class="p-4 bg-white">
+          <h3 class="font-semibold">Warm Hoodies </h3>
+          <p class="text-sm text-gray-500 mt-1">Cozy, bold, and limited runs.</p>
+        </div>
+      </a>
+
+      <!-- CROP HOODIE IMAGE (user-provided) -->
+      <a href="collection.html?type=crop" class="group rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5WzCKAOT5Bkpaml9PbXwg-pas__TcQ6L6HQ&s
+        
+        
+        
+        
+        " alt="Crop Hoodies" class="w-full h-48 object-cover">
+        <div class="p-4 bg-white">
+          <h3 class="font-semibold">Crop Hoodies (Ladies)</h3>
+          <p class="text-sm text-gray-500 mt-1">Trendy cropped hoodies with premium prints.</p>
+        </div>
+      </a>
+    </div>
+  </section> 
+
+  <!-- Featured Products -->
+   <section class="container mx-auto py-16">
+    <h2 class="text-3xl font-bold text-center mb-10">Featured Products</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <img src="https://assets.myntassets.com/dpr_1.5,q_30,w_400,c_limit,fl_progressive/assets/images/32852606/2025/4/4/4e38d83f-0525-49e8-9d4b-0d0b7f11f2e01743751068248-Allen-Solly-Men-Tshirts-8231743751067812-1.jpg" class="w-[550px] h-[700px] object-cover mx-auto" alt="T-Shirt">
+        <div class="p-4">
+          <h3 class="font-bold text-lg">Classic Graphic Tee</h3>
+          <p class="text-gray-700">$25</p>
+        </div>
+      </div>
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <img src="https://underarmour.scene7.com/is/image/Underarmour/V5-1373880-421_FC?rp=standard-0pad|gridTileDesktop&scl=1&fmt=jpg&qlt=50&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=512&hei=640&size=512,640" class="w-[550px] h-[700px] object-cover mx-auto" alt="Hoodie">
+        <div class="p-4">
+          <h3 class="font-bold text-lg">Cozy Hoodie</h3>
+          <p class="text-gray-700">$40</p>
+        </div>
+      </div>
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <img src="https://www.gorillawear.com/resize/91522800-pixley-crop-top-hoodie-gray_7513763182586.jpg/0/1100/True/pixley-crop-top-hoodie-gray-xs.jpg" class="w-[550px] h-[700px] object-cover mx-auto" alt="Crop Hoodie">
+        <div class="p-4">
+          <h3 class="font-bold text-lg">Stylish Crop Hoodie</h3>
+          <p class="text-gray-700">$35</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h3 class="text-xl font-bold">About NoirBleed</h3>
+        <p class="mt-2 text-gray-600">NoirBleed crafts graphical printed apparel that feels like art. We focus on clean prints, premium materials, and limited drops so you stay unique.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold">Customer Love</h3>
+        <blockquote class="mt-2 text-gray-600">“The print quality is unreal — colors stayed vibrant after multiple washes.” — Zara</blockquote>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold">Join our newsletter</h3>
+        <form class="mt-2 flex gap-2">
+          <input type="email" placeholder="Email address" class="flex-1 px-3 py-2 rounded border" required>
+          <button class="bg-[#1E3A8A] text-white px-4 rounded">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-300 mt-10">
+    <div class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <div class="flex items-center gap-3">
+          <svg class="w-10 h-10" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><path d="M34 96c28-48 120-84 240-64 120 20 120 64 86 86-34 22-132 30-220 6S30 120 34 96z" fill="#4B5563" opacity="0.14"/></svg>
+          <div>
+            <div class="font-bold text-white">NoirBleed</div>
+            <div class="text-sm">Graphical Printed Apparel</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="font-semibold text-white">Quick Links</div>
+        <ul class="mt-2 text-sm space-y-1">
+          <li><a href="#collections" class="hover:underline">Collections</a></li>
+          <li><a href="cart.html" class="hover:underline">Cart</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="font-semibold text-white">Follow</div>
+        <div class="mt-2 flex gap-4">
+          <a href="#" class="text-sm hover:underline">Instagram</a>
+          <a href="#" class="text-sm hover:underline">Facebook</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-sm text-gray-500 py-4">© 2025 NoirBleed. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // product counts and image mapping (use user-provided images)
+    const productCounts = { tshirt: 100, hoodie: 50, crop: 50 };
+    const imageMap = {
+      tshirt: "https://assets.myntassets.com/dpr_1.5,q_30,w_400,c_limit,fl_progressive/assets/images/32852606/2025/4/4/4e38d83f-0525-49e8-9d4b-0d0b7f11f2e01743751068248-Allen-Solly-Men-Tshirts-8231743751067812-1.jpg",
+      hoodie: "https://underarmour.scene7.com/is/image/Underarmour/V5-1373880-421_FC?rp=standard-0pad|gridTileDesktop&scl=1&fmt=jpg&qlt=50&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=512&hei=640&size=512,640",
+      crop: "https://www.gorillawear.com/resize/91522800-pixley-crop-top-hoodie-gray_7513763182586.jpg/0/1100/True/pixley-crop-top-hoodie-gray-xs.jpg"
+    };
+
+    // featured products using same images
+    const featured = [
+      { name: "Noir Tee — Eclipse", price: 26.99, type: "tshirt", img: imageMap.tshirt },
+      { name: "Bleed Hoodie — Crimson", price: 44.00, type: "hoodie", img: imageMap.hoodie },
+      { name: "Noir Crop — Slate", price: 36.50, type: "crop", img: imageMap.crop },
+      { name: "Noir Tee — Wave", price: 24.50, type: "tshirt", img: imageMap.tshirt },
+      { name: "Bleed Hoodie — Noir", price: 48.00, type: "hoodie", img: imageMap.hoodie },
+      { name: "Noir Crop — Bloom", price: 34.00, type: "crop", img: imageMap.crop }
+    ];
+
+    const featuredContainer = document.getElementById("featured-products");
+    featured.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "bg-white rounded-xl shadow overflow-hidden hover:shadow-xl transition";
+      card.innerHTML = `
+        <img src="${p.img}" class="w-full h-48 object-cover" alt="${p.name}">
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h4 class="font-semibold">${p.name}</h4>
+              <div class="text-sm text-gray-500">$${p.price.toFixed(2)}</div>
+            </div>
+            <div class="text-sm text-gray-400">Limited</div>
+          </div>
+          <div class="mt-3 flex gap-2">
+            <button onclick="viewCollection('${p.type}')" class="flex-1 bg-[#1E3A8A] text-white py-2 rounded">View</button>
+            <button onclick="addToCart('${p.name}', ${p.price})" class="flex-1 bg-[#800000] text-white py-2 rounded">Add</button>
+          </div>
+        </div>
+      `;
+      featuredContainer.appendChild(card);
+    });
+
+    function viewCollection(type) { location.href = `collection.html?type=${type}`; }
+
+    function addToCart(name, price) {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      cart.push({ name, price: parseFloat(price) });
+      localStorage.setItem('nb_cart', JSON.stringify(cart));
+      alert(`${name} added to cart`);
+    }
+    function addToCart(name, price, image) {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      const existing = cart.find(it => it.name === name);
+      
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, image, qty: 1 });
+      }
+
+      localStorage.setItem('nb_cart', JSON.stringify(cart));
+      updateCartCount();
+      alert(`${name} added to cart!`);
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      const count = cart.reduce((sum, it) => sum + (it.qty || 1), 0);
+      const badge = document.getElementById('cart-count');
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    }
+
+    // run once on page load
+    updateCartCount();
+
+
+    
+  </script>
+
+  </script>
+
+</body>
+</html>

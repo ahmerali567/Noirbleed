@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoirBleed — Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- NAV -->
+  <nav class="bg-gradient-to-r from-[#1E3A8A] via-[#374151] to-[#800000] text-white p-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-10 h-10" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <path d="M34 96c28-48 120-84 240-64 120 20 120 64 86 86-34 22-132 30-220 6S30 120 34 96z" fill="#4B5563" opacity="0.14"/>
+        </svg>
+        <div class="font-bold text-lg">NoirBleed</div>
+      </a>
+
+      <!-- Cart Icon with Badge -->
+      <div class="relative">
+        <a href="cart.html" class="flex items-center">
+          🛒
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+
+    <!-- Cart Area -->
+    <div id="cart-area" class="bg-white rounded-xl shadow p-6"></div>
+
+    <!-- Checkout Form -->
+    <div id="checkout-form" class="hidden mt-10 bg-white shadow rounded-xl p-6">
+      <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
+      <form onsubmit="submitOrder(event)" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium">Full Name</label>
+          <input type="text" id="custName" required class="w-full border rounded-lg p-2 mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Email</label>
+          <input type="email" id="custEmail" required class="w-full border rounded-lg p-2 mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Address</label>
+          <textarea id="custAddress" required class="w-full border rounded-lg p-2 mt-1"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Payment Method</label>
+          <select id="payment" required class="w-full border rounded-lg p-2 mt-1">
+            <option value="COD">Cash on Delivery</option>
+            <option value="Card">Credit / Debit Card</option>
+            <option value="Paypal">Paypal</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-[#800000] text-white py-3 rounded-lg font-semibold">Place Order</button>
+      </form>
+    </div>
+
+    <!-- Thank You Message -->
+    <div id="thankyou" class="hidden text-center mt-10">
+      <h2 class="text-3xl font-bold text-[#1E3A8A]">🎉 Thank you for shopping with NoirBleed!</h2>
+      <p class="mt-4 text-gray-600">Your order has been placed successfully. We’ll deliver your fashion soon!</p>
+      <a href="index.html" class="inline-block mt-6 px-6 py-3 bg-[#800000] text-white rounded-lg">Back to Home</a>
+    </div>
+  </main>
+
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      const count = cart.reduce((sum, it) => sum + (it.qty || 1), 0);
+      const badge = document.getElementById('cart-count');
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-area');
+      const checkoutForm = document.getElementById('checkout-form');
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+
+      updateCartCount();
+
+      if (!cart.length) {
+        container.innerHTML = '<p class="text-gray-500">Your cart is empty. <a href="index.html" class="text-[#1E3A8A] underline">Shop now</a></p>';
+        checkoutForm.classList.add('hidden');
+        return;
+      }
+
+      let total = 0;
+      const rows = cart.map((it, idx) => {
+        const price = parseFloat(it.price) || 0;
+        const qty = it.qty || 1;
+        const subtotal = price * qty;
+        total += subtotal;
+
+        return `
+          <div class="flex items-center justify-between border-b py-4">
+            <div class="flex items-center gap-4">
+              <img src="${it.image}" class="w-24 h-24 object-cover rounded">
+              <div>
+                <div class="font-medium">${it.name}</div>
+                <div class="text-gray-500 text-sm">$${price.toFixed(2)} each</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <input type="number" min="1" value="${qty}" onchange="updateQty(${idx}, this.value)" class="w-16 border rounded p-1 text-center">
+              <div class="font-semibold">$${subtotal.toFixed(2)}</div>
+              <button onclick="removeItem(${idx})" class="text-red-600 text-sm">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        ${rows}
+        <div class="flex justify-between pt-4 font-bold text-xl">
+          <div>Total</div>
+          <div>$${total.toFixed(2)}</div>
+        </div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button onclick="clearCart()" class="px-4 py-2 rounded border">Clear</button>
+          <button onclick="showCheckout()" class="px-4 py-2 rounded bg-[#800000] text-white">Proceed to Checkout</button>
+        </div>
+      `;
+    }
+
+    function updateQty(index, qty) {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      cart[index].qty = parseInt(qty);
+      localStorage.setItem('nb_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('nb_cart') || '[]');
+      cart.splice(index,1);
+      localStorage.setItem('nb_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function clearCart() {
+      if (!confirm('Clear entire cart?')) return;
+      localStorage.removeItem('nb_cart');
+      renderCart();
+    }
+
+    function showCheckout() {
+      document.getElementById('checkout-form').classList.remove('hidden');
+      window.scrollTo({ top: document.getElementById('checkout-form').offsetTop, behavior: 'smooth' });
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      localStorage.removeItem('nb_cart');
+      document.getElementById('cart-area').classList.add('hidden');
+      document.getElementById('checkout-form').classList.add('hidden');
+      document.getElementById('thankyou').classList.remove('hidden');
+      updateCartCount();
+    }
+
+    // Initial render
+    renderCart();
+  </script>
+</body>
+</html>
+
